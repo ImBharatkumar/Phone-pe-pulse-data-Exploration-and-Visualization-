@@ -1,6 +1,6 @@
 import streamlit as st
 st.title("Phone pe Pulse Data")
-import mysql.connector
+import mysql.connector as connect
 import pandas as pd
 import numpy as np
 import json
