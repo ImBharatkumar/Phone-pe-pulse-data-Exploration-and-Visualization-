@@ -2,10 +2,12 @@
 Through this project i have explored and visualized the Phone pe pulse github data.
 
 #Steps involved.
-##1) Clone  https://github.com/PhonePe/pulse.git
+
+#1) Clone  https://github.com/PhonePe/pulse.git
 *import necessary libraries listed in requirements.txt
 *from pulse folder import/load json files of all states and convert json files into usefull dataframes.
 *convert DataFrame into csv file.
+
 '''#Agg_transaction_data
 
 path=r"C:\Users\Barry\Desktop\projects\capstone2\pulse\data\aggregated\transaction\country\india\state/"
@@ -40,10 +42,11 @@ for i in Agg_state_list:
 #Succesfully created a dataframe
 df=pd.DataFrame(clm)
 #convert df to csv
-df.to_csv(r'C:\Users\Barry\Desktop\projects\capstone2\agg_trans.csv',index=False)'''
+df.to_csv(r'C:\Users\Barry\Desktop\projects\capstone2\agg_trans.csv',index=False)
+'''
 
 
-##2) Push Data into MySQL database.
+#2) Push Data into MySQL database.
 *Establish connection between MySQL using python.
 *Create a Database and Table with respective columns in dataframe. 
 *Write query to push data into Table.
@@ -58,20 +61,20 @@ config = {
    'raise_on_warnings': True
  }
 
-# Connect to the database
+## Connect to the database
 cnx = mysql.connector.connect(**config)
 
-# Check if the connection is successful
+## Check if the connection is successful
 if cnx.is_connected():
   print("Connection to MySQL database established.")
 else:
   print("Connection to MySQL database failed.")
   
-  # create a table name and store the dataframe
+  ## create a table name and store the dataframe
 df.to_sql(name='agg_trans', con=engine, if_exists='replace', index=False)
 '''
 
-##3)Retrive data for Visualization.
+#3)Retrive data for Visualization.
 *From MySQL retreive data.
 *COnvert it into dataframe.
 '''## Execute the SQL query and store the result in a Pandas dataframe
@@ -80,7 +83,7 @@ query = "SELECT * FROM agg_trans"
 agg_tran = pd.read_sql(query, cnx)
 '''
 
-##4)Visualization.
+#4)Visualization.
 *Download indian jeojson file and use it with plotly Choropleth visualize statewise transactions.
 *Using retrieved DataFrame visualize the data.
 *refer("phone_pe_pulse.py")
