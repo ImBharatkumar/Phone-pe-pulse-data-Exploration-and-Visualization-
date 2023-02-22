@@ -7,14 +7,12 @@ Through this project i have explored and visualized the Phone pe pulse github da
 *import necessary libraries listed in requirements.txt
 *from pulse folder import/load json files of all states and convert json files into usefull dataframes.
 *convert DataFrame into csv file.
-'''
+```
 #Agg_transaction_data
-
 path=r"C:\Users\Barry\Desktop\projects\capstone2\pulse\data\aggregated\transaction\country\india\state/"
 Agg_state_list=os.listdir(path)
 Agg_state_list
 #Agg_state_list--> to get the list of states in India
-
 #<---------------------------------------------------
 
 #This is to extract the data's to create a dataframe
@@ -39,19 +37,17 @@ for i in Agg_state_list:
               clm['State'].append(i)
               clm['Year'].append(j)
               clm['Quater'].append(int(k.strip('.json')))
-#Succesfully created a dataframe
+Succesfully created a dataframe
 df=pd.DataFrame(clm)
-#convert df to csv
+convert df to csv
 df.to_csv(r'C:\Users\Barry\Desktop\projects\capstone2\agg_trans.csv',index=False)
-'''
-
-
+```
 
 #2) Push Data into MySQL database.
-*Establish connection between MySQL using python.
-*Create a Database and Table with respective columns in dataframe. 
-*Write query to push data into Table.
-'''
+###Establish connection between MySQL using python.
+###Create a Database and Table with respective columns in dataframe. 
+###Write query to push data into Table.
+```
 engine = create_engine('mysql+mysqlconnector://root:Bharatkori#1998@127.0.0.1:3306/phone_pe')
 
 config = {
@@ -72,16 +68,18 @@ else:
   print("Connection to MySQL database failed.")
   
   ## create a table name and store the dataframe
-df.to_sql(name='agg_trans', con=engine, if_exists='replace', index=False)'''
+df.to_sql(name='agg_trans', con=engine, if_exists='replace', index=False)
+```
 
 #3)Retrive data for Visualization.
+```
 *From MySQL retreive data.
 *COnvert it into dataframe.
 '''## Execute the SQL query and store the result in a Pandas dataframe
 cursor = cnx.cursor()
 query = "SELECT * FROM agg_trans"
 agg_tran = pd.read_sql(query, cnx)
-'''
+```
 
 #4)Visualization.
 *Download indian jeojson file and use it with plotly Choropleth visualize statewise transactions.
